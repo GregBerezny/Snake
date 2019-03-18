@@ -1,0 +1,24 @@
+{
+  "name": "snake",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GregBerezny/Snake.git"
+  },
+  "author": "Greg Berezny",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GregBerezny/Snake/issues"
+  },
+  "homepage": "https://github.com/GregBerezny/Snake#readme"
+}
