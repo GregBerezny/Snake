@@ -1,1 +1,25 @@
-<div id="container"></div>
+
+<script type="text/javascript" src="scripts/GUI.js"> </script>
+
+<script>
+init = function() {
+    
+    var gui = GUI();
+    
+    // set up the main loop
+    setInterval(update, 1000 / 60);
+    function update() {
+        gui.draw();
+    }
+}
+</script>
+
+<body onload="init()">
+
+<div id="container">
+
+    <canvas id="canvas-game" width="225" height="225"></canvas>
+
+</div>
+
+</body>
