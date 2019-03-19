@@ -1,5 +1,6 @@
 
 <script type="text/javascript" src="scripts/GUI.js"> </script>
+<script type="text/javascript" src="scripts/jquery-3.3.1.min.js"> </script>
 
 <script>
 init = function() {
@@ -7,18 +8,20 @@ init = function() {
     var gui = GUI();
     
     // set up the main loop
-    setInterval(update, 1000 / 60);
+    setInterval(update, 3200 / 60);
     function update() {
-        gui.draw();
+        gui.update();
     }
+
+     document.getElementById("body").focus(); 
 }
 </script>
 
-<body onload="init()">
+<body id="body" onload="init()">
 
 <div id="container">
 
-    <canvas id="canvas-game" width="225" height="225"></canvas>
+    <canvas id="canvas-game" width="272" height="272"></canvas>
 
 </div>
 
