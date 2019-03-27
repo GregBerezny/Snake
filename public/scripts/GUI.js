@@ -8,21 +8,23 @@ GUI = function () {
     self.boardHeight = 16;
     self.tileSize = 16;
 
-    self.head = [1, 1];
+    self.head = [4, 4];
+    self.tail = [];
+    self.last = [3, 4];
     self.velocity = [1, 0];
 
     self.board = [[4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
-                  [4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+                  [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+                  [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+                  [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+                  [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+                  [4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
                   [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
                   [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
                   [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
                   [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
                   [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
-                  [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
-                  [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
-                  [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
-                  [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
-                  [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
+                  [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 4],
                   [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
                   [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
                   [4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4],
@@ -76,11 +78,37 @@ $(function() {
         var x = self.head[0] + self.velocity[0];
         var y = self.head[1] + self.velocity[1];
 
-        if (self.board[x][y] != 4) {
+        if (self.board[x][y] != 4 && self.board[x][y] != 2) {
+
+            self.last = [self.head[0], self.head[1]];
+
+            if (self.tail.length > 0) {
+                self.last = [self.tail[self.tail.length-1][0], self.tail[self.tail.length-1][1]];
+                self.board[self.last[0]][self.last[1]] = 0;
+                for (var i = self.tail.length-1; i > 0; i--) {
+                    self.tail[i][0] = self.tail[i-1][0];
+                    self.tail[i][1] = self.tail[i-1][1];
+                }
+
+                self.tail[0][0] = self.head[0];
+                self.tail[0][1] = self.head[1];
+                self.board[self.tail[0][0]][self.tail[0][1]] = 2;
+            }
             self.head[0] = x;
             self.head[1] = y;
+
+            
         }
+
+        if (self.board[x][y] == 3) {
+            self.generateFruit();
+            self.tail.push([self.last[0], self.last[1]]);
+            self.board[self.last[0]][self.last[1]] = 2;
+        }
+       
         self.board[self.head[0]][self.head[1]] = 1;
+
+
 
         self.draw();
     }
@@ -119,6 +147,15 @@ $(function() {
             }
         }
 
+    }
+
+    self.generateFruit = function() {
+        do {
+            var x = Math.floor(Math.random() * self.boardWidth);
+            var y = Math.floor(Math.random() * self.boardHeight);
+        } while(self.board[x][y] != 0);
+
+        self.board[x][y] = 3;
     }
 
     return self;
