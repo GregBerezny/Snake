@@ -1,11 +1,14 @@
 
 <script type="text/javascript" src="scripts/GUI.js"> </script>
-<script type="text/javascript" src="scripts/jquery-3.3.1.min.js"> </script>
+<script type="text/javascript" src="resources/jquery-3.3.1.min.js"> </script>
+<script type="text/javascript" src="resources/swipe.min.js"> </script>
 
 <script>
 init = function() {
     
     var gui = GUI();
+
+    gui.start();
     
     // set up the main loop
     setInterval(update, 3200 / 60);
@@ -21,7 +24,9 @@ init = function() {
 
 <div id="container">
 
-    <canvas id="canvas-game" width="272" height="272"></canvas>
+    <canvas id="canvas-game" width="816" height="544"></canvas>
+
+    <span id="score-label"> Score: <span id="score-number">0</span></span>
 
 </div>
 

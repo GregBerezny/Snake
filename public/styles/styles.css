@@ -28,3 +28,11 @@ html, body {
     background-color: #475841;
     margin: 0;
 }
+
+#score-label {
+    color: white;
+    font-size: 16;
+    position: absolute;
+    top: 50px;
+    left: 850px;
+}
