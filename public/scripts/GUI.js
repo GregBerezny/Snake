@@ -66,24 +66,24 @@ $(function() {
 		//Generic swipe handler for all directions
 		swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
 			if (direction == "left") {
-                if (self.velocity[0] != 1 || self.tail.length == 0) {
+               // if (self.velocity[0] != 1 || self.tail.length == 0) {
                     self.velocity = [-1, 0]; 
-                }
+                //}
 			}
 			if (direction == "right") {
-                if (self.velocity[1] != 1 || self.tail.length == 0) {
+                //if (self.velocity[1] != 1 || self.tail.length == 0) {
                     self.velocity = [0, -1]; 
-                }
+                //}
 			}			
 			if (direction == "down") {
-                if (self.velocity [0] != -1 || self.tail.length == 0) {
+                //if (self.velocity [0] != -1 || self.tail.length == 0) {
                     self.velocity = [1, 0]; 
-                }
+                //}
 			}
 			if (direction == "up") {
-                if (self.velocity[1] != -1 || self.tail.length == 0) {
+                //if (self.velocity[1] != -1 || self.tail.length == 0) {
                     self.velocity = [0, 1]; 
-                }
+                //}
 			}
 		},
 		//Default is 75px, set to 0 for demo so any distance triggers swipe
