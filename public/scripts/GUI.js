@@ -68,21 +68,25 @@ $(function() {
 			if (direction == "left") {
                // if (self.velocity[0] != 1 || self.tail.length == 0) {
                     self.velocity = [-1, 0]; 
+                    return;
                 //}
 			}
 			if (direction == "right") {
                 //if (self.velocity[1] != 1 || self.tail.length == 0) {
                     self.velocity = [0, -1]; 
+                    return;
                 //}
 			}			
 			if (direction == "down") {
                 //if (self.velocity [0] != -1 || self.tail.length == 0) {
                     self.velocity = [1, 0]; 
+                    return;
                 //}
 			}
 			if (direction == "up") {
                 //if (self.velocity[1] != -1 || self.tail.length == 0) {
                     self.velocity = [0, 1]; 
+                    return;
                 //}
 			}
 		},
