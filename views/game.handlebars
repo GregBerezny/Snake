@@ -1,19 +1,20 @@
 
-<script type="text/javascript" src="scripts/GUI.js"> </script>
+<script type="text/javascript" src="scripts/Board.js"> </script>
+<script type="text/javascript" src="scripts/Game.js"> </script>
 <script type="text/javascript" src="resources/jquery-3.3.1.min.js"> </script>
 <script type="text/javascript" src="resources/swipe.min.js"> </script>
 
 <script>
 init = function() {
     
-    var gui = GUI();
+    var game = Game();
 
-    gui.start();
+    game.start();
     
     // set up the main loop
     setInterval(update, 3200 / 60);
     function update() {
-        gui.update();
+        game.update();
     }
 
      document.getElementById("body").focus(); 
