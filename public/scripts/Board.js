@@ -8,6 +8,8 @@ Board = function() {
     self.height = 32;
     self.tileSize = 16;
 
+    self.fruit = [];
+
     self.initilize = function() {
         for (var y = 0; y < self.height; y++) {
             self.board.push([]);
@@ -35,7 +37,12 @@ Board = function() {
 
     self.setFruit = function(pos) {
         self.board[pos[1]][pos[0]] = 3;
+        self.fruit = pos;
     };
+
+    self.getFruit = function() {
+        return self.fruit;
+    }
 
     self.isEmpty = function(pos) {
         return self.board[pos[1]][pos[0]] == 0;

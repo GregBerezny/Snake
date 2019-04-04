@@ -1,0 +1,37 @@
+
+<script type="text/javascript" src="scripts/Board.js"> </script>
+<script type="text/javascript" src="scripts/AI.js"> </script>
+<script type="text/javascript" src="scripts/Game.js"> </script>
+<script type="text/javascript" src="resources/jquery-3.3.1.min.js"> </script>
+<script type="text/javascript" src="resources/swipe.min.js"> </script>
+
+<script>
+init = function() {
+    
+    var game = Game();
+
+    game.setAuto();
+
+    game.start();
+    
+    // set up the main loop
+    setInterval(update, 3200 / 60);
+    function update() {
+        game.update();
+    }
+
+     document.getElementById("body").focus(); 
+}
+</script>
+
+<body id="body" onload="init()">
+
+<div id="container">
+
+    <canvas id="canvas-game" width="816" height="544"></canvas>
+
+    <span id="score-label"> Score: <span id="score-number">0</span></span>
+
+</div>
+
+</body>

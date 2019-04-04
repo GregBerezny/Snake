@@ -6,6 +6,9 @@ Game = function() {
 
     self.board = Board();
 
+    self.auto = false;
+    self.ai = null;
+
     self.head = [4, 4];
     self.tail = [];
     self.last = [3, 4];
@@ -19,7 +22,15 @@ Game = function() {
         self.generateFruit();
     };
 
+    self.setAuto = function() {
+        self.auto = true;
+        self.ai = AIJS();
+    };
+
     document.body.onkeydown = function(e) {
+
+        if (self.auto) { return; }
+
         switch(e.keyCode) {
             case 37: case 65: 
                 self.nextVelocity = [-1, 0];
@@ -45,6 +56,9 @@ $(function() {
 	$("body").swipe( {
 		//Generic swipe handler for all directions
 		swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+
+            if (self.auto) { return; }
+
 			if (direction == "left") {
                 self.nextVelocity = [-1, 0]; 
                 return;
@@ -70,6 +84,10 @@ $(function() {
 
 
     self.update = function() {
+
+        if (self.auto) {
+            self.nextVelocity = self.ai.getNextMove(self);
+        }
 
         if (self.nextVelocity[0] == -1 && (self.velocity[0] != 1 || self.tail.length == 0)) {
             self.velocity = [-1, 0]; 

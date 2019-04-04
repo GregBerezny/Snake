@@ -26,4 +26,8 @@ app.get('/game', function(req, res) {
 	res.render('game');
 });
 
+app.get('/auto', function(req, res) {
+	res.render('auto');
+});
+
 app.listen(app.get('port'));
