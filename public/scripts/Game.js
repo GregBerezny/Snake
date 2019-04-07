@@ -148,7 +148,7 @@ $(function() {
     self.draw = function () {
 
         self.ctx.clearRect(0, 0, self.board.width*(self.board.tileSize+1), self.board.height*(self.board.tileSize+1));
-        self.ctx.fillStyle = "#9A7A49";
+        self.ctx.fillStyle = "#EDD65A";
         self.ctx.fillRect(0, 0, self.board.width*(self.board.tileSize+1), self.board.height*(self.board.tileSize+1));
 
         for (let y=0; y<self.board.height; y++) {
@@ -156,18 +156,18 @@ $(function() {
            for (let x=0; x<self.board.width; x++) {
 
                 if (self.board.isEmpty([x, y])) { 
-                    self.ctx.fillStyle = "green";
+                    self.ctx.fillStyle = "#F2E7C3";
                 } else if (self.board.isHead([x, y])) { 
-                    self.ctx.fillStyle = "red";
+                    self.ctx.fillStyle = "#2A869D";
                 } else if (self.board.isTail([x, y])) { 
-                    self.ctx.fillStyle = "blue";
+                    self.ctx.fillStyle = "#3DC9A7";
                 } else if (self.board.isFruit([x, y])) { 
-                    self.ctx.fillStyle = "purple";
+                    self.ctx.fillStyle = "#FFAC08";
                 } else if (self.board.isWall([x, y])) { 
-                    self.ctx.fillStyle = "yellow";
+                    self.ctx.fillStyle = "#405059";
                 }
 
-                self.ctx.fillRect((self.board.tileSize*x)+x+1, (self.board.tileSize*y)+y+1, self.board.tileSize, self.board.tileSize);
+                self.ctx.fillRect((self.board.tileSize*x), (self.board.tileSize*y), self.board.tileSize, self.board.tileSize);
             }
         }
 
