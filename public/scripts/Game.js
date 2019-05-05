@@ -16,6 +16,8 @@ Game = function() {
     self.velocity = [1, 0];
     self.nextVelocity = [1, 0];
 
+    self.pause = false;
+
     self.start = function() {
         self.board.initilize();
         self.board.setHead(self.head);
@@ -46,6 +48,9 @@ Game = function() {
                 break;
             case 32: 
                 e.preventDefault(); 
+                break;
+            case 80:
+                self.pause = !self.pause;
                 break;
             default: break;
         }
@@ -84,6 +89,10 @@ $(function() {
 
 
     self.update = function() {
+
+        if (self.pause) {
+            return;
+        }
 
         if (self.auto) {
             self.nextVelocity = self.ai.getNextMove(self);
@@ -186,3 +195,6 @@ $(function() {
 
     return self;
 }
+
+//Color Scheme:
+//https://www.pixelscrapper.com/legacy/marisa-lerin/assets/lunch-time-palette-blue-green-orange-tan-teal-yellow-image-commercial-use-digita
