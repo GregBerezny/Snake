@@ -19,6 +19,7 @@ Game = function() {
     self.pause = false;
 
     self.start = function() {
+        self.pause = false;
         self.board.initilize();
         self.board.setHead(self.head);
         self.generateFruit();
@@ -137,7 +138,12 @@ $(function() {
 
             
         } else {
-            window.location.href = '/';
+            $.post('/save', { score: self.tail.length },
+             function() {
+                window.location.href = '/';
+             });
+            self.pause = true;
+            return;
         }
 
         if (self.board.isFruit([x, y])) {
