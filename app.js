@@ -1,6 +1,10 @@
 var express = require('express');
 var mongoose = require('mongoose');
 
+var aiID = "5d6f214a1c9d440000462eda";
+var playerID = "5d6b46d5e419110fe12cb32c";
+var mode = '';
+
 init();
 
 async function init() {
@@ -46,24 +50,36 @@ app.get('/', function(req, res) {
 
 app.post('/save', function(req, res) {
   if (req.body.score > highscore.highscore) {
-    HighscoreModel.findByIdAndUpdate('5d6b46d5e419110fe12cb32c', 
-                      {$set:{ highscore : req.body.score}}, 
-                      {new: true},
-                      function(err){
+    if (mode === 'player') {
+      HighscoreModel.findByIdAndUpdate(playerID, 
+        {$set:{ highscore : req.body.score}}, 
+        {new: true},
+        function(err){
                        
-                      });
+        });
+    } else if (mode === 'ai') {
+      HighscoreModel.findByIdAndUpdate(aiID, 
+        {$set:{ highscore : req.body.score}}, 
+        {new: true},
+        function(err){
+         
+        });
+    }
   } 
   
   res.json({ ok: true });
 });
 
 app.get('/game', async function(req, res) {
-  highscore = await HighscoreModel.findById('5d6b46d5e419110fe12cb32c').lean().exec();
+  highscore = await HighscoreModel.findById(playerID).lean().exec();
+  mode = "player";
 	res.render('game', {highscore: highscore.highscore});
 });
 
-app.get('/auto', function(req, res) {
-	res.render('auto');
+app.get('/auto', async function(req, res) {
+  highscore = await HighscoreModel.findById(aiID).lean().exec();
+  mode = "ai";
+	res.render('auto', {highscore: highscore.highscore});
 });
 
 app.listen(app.get('port'));

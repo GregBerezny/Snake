@@ -4,7 +4,7 @@ AIJS = function() {
     self.velocities = [[1, 0], [-1, 0], [0, 1], [0, -1]];
 
     self.getNextMove = function(game) {
-        var index = -1;
+        var index = 0;
         var distance = 100000;
 
         for (var i = 0; i < self.velocities.length; i++) {
