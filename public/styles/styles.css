@@ -48,18 +48,45 @@ html, body {
 
 #score-label {
     color: #F2E7C3;
-    font-size: 16;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    top: 150px;
+    left: 850px;
+}
+
+#high-score-label {
+    color: #F2E7C3;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    top: 175px;
+    left: 850px;
+}
+
+#restartLink {
+    color: #405059;
+    font-size: 16px;
     font-weight: bold;
     position: absolute;
     top: 50px;
     left: 850px;
 }
 
-#high-score-label {
-    color: #F2E7C3;
-    font-size: 16;
+#menuLink {
+    color: #405059;
+    font-size: 16px;
     font-weight: bold;
     position: absolute;
     top: 75px;
+    left: 850px;
+}
+
+#toggleGridLabel {
+    color: #F2E7C3;
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    top: 250px;
     left: 850px;
 }

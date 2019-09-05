@@ -17,9 +17,11 @@ Game = function() {
     self.nextVelocity = [1, 0];
 
     self.pause = false;
+    self.gameOver = false;
 
     self.start = function() {
         self.pause = false;
+        self.gameOver = false;
         self.board.initilize();
         self.board.setHead(self.head);
         self.generateFruit();
@@ -32,7 +34,14 @@ Game = function() {
 
     document.body.onkeydown = function(e) {
 
-        if (self.auto) { return; }
+        if (e.keyCode == 80) {
+            self.pause = !self.pause;
+            return;
+        }
+
+        if (self.auto) {
+            return; 
+        }
 
         switch(e.keyCode) {
             case 37: case 65: 
@@ -49,9 +58,6 @@ Game = function() {
                 break;
             case 32: 
                 e.preventDefault(); 
-                break;
-            case 80:
-                self.pause = !self.pause;
                 break;
             default: break;
         }
@@ -91,7 +97,8 @@ $(function() {
 
     self.update = function() {
 
-        if (self.pause) {
+        if (self.pause || self.gameOver) {
+            self.draw();
             return;
         }
 
@@ -140,9 +147,10 @@ $(function() {
         } else {
             $.post('/save', { score: self.tail.length },
              function() {
-                window.location.href = '/';
+
              });
-            self.pause = true;
+            self.gameOver = true;
+            self.board.setHead(self.head);
             return;
         }
 
@@ -170,8 +178,16 @@ $(function() {
 
            for (let x=0; x<self.board.width; x++) {
 
-                if (self.board.isEmpty([x, y])) { 
-                    self.ctx.fillStyle = "#F2E7C3";
+                if ($("#toggleGrid").length && $("#toggleGrid").is(":checked")) {
+                    self.drawBorder((self.board.tileSize*x), (self.board.tileSize*y), self.board.tileSize, self.board.tileSize);
+                }
+
+                if (self.board.isEmpty([x, y])) {
+                    if (self.gameOver) {
+                        self.ctx.fillStyle = "#EDD75A";
+                    } else {
+                        self.ctx.fillStyle = "#F2E7C3";
+                    }
                 } else if (self.board.isHead([x, y])) { 
                     self.ctx.fillStyle = "#2A869D";
                 } else if (self.board.isTail([x, y])) { 
@@ -185,7 +201,12 @@ $(function() {
                 self.ctx.fillRect((self.board.tileSize*x), (self.board.tileSize*y), self.board.tileSize, self.board.tileSize);
             }
         }
+        
+    }
 
+    self.drawBorder = function(xPos, yPos, width, height, thickness = 1) {
+        self.ctx.fillStyle='#000';
+        self.ctx.fillRect(xPos - (thickness), yPos - (thickness), width + (thickness * 2), height + (thickness * 2));
     }
 
     self.generateFruit = function() {
